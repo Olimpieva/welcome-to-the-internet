@@ -11,7 +11,7 @@ function MainPage() {
     }
 
     return (
-        <section className='main-page'>
+        <main className='main-page'>
             <h1 className='main-page__title'>Welcome to the Internet</h1>
             <form className='main-form'>
                 <h2 className='main-form__text'>Do you want to start?</h2>
@@ -24,8 +24,7 @@ function MainPage() {
                     <button type='button' className='main-form__button main-form__button_resolve'>Yes</button>
                 </div>
             </form>
-
-        </section>
+        </main>
 
     );
 }
