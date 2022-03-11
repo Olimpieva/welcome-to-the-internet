@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Snake from './Snake';
 import Food from './Food';
 
@@ -13,7 +14,6 @@ const getRandomCoordinates = () => {
 }
 
 const initialState = {
-    isStarted: false,
     food: getRandomCoordinates(),
     speed: 200,
     direction: 'RIGHT',
@@ -28,21 +28,16 @@ class SnakeGame extends Component {
     state = initialState;
 
     componentDidMount() {
+        console.log(this.props.navigate)
         setInterval(this.moveSnake, this.state.speed);
         document.onkeydown = this.onKeyDown;
-    }
+    };
 
     componentDidUpdate() {
-
-        if (!this.state.isStarted) {
-            return;
-        }
-        console.log('YA TUT')
-        console.log(this.state)
         this.checkIfOutOfBorders();
         this.checkIfCollapsed();
         this.checkIfEat();
-    }
+    };
 
     onKeyDown = (e) => {
         e = e || window.event;
@@ -61,8 +56,8 @@ class SnakeGame extends Component {
                 break;
             default:
                 break;
-        }
-    }
+        };
+    };
 
     moveSnake = () => {
         let dots = [...this.state.snakeDots];
@@ -83,22 +78,22 @@ class SnakeGame extends Component {
                 break;
             default:
                 break;
-        }
+        };
 
         dots.push(head);
         dots.shift();
 
         this.setState({
             snakeDots: dots
-        })
-    }
+        });
+    };
 
     checkIfOutOfBorders() {
         let head = this.state.snakeDots[this.state.snakeDots.length - 1];
         if (head[0] >= 100 || head[1] >= 100 || head[0] < 0 || head[1] < 0) {
             this.onGameOver();
-        }
-    }
+        };
+    };
 
     checkIfCollapsed() {
         let snake = [...this.state.snakeDots];
@@ -107,9 +102,9 @@ class SnakeGame extends Component {
         snake.forEach(dot => {
             if (head[0] == dot[0] && head[1] == dot[1]) {
                 this.onGameOver();
-            }
-        })
-    }
+            };
+        });
+    };
 
     checkIfEat() {
         let head = this.state.snakeDots[this.state.snakeDots.length - 1];
@@ -120,60 +115,49 @@ class SnakeGame extends Component {
             })
             this.enlargeSnake();
             this.increaseSpeed();
-        }
-    }
+        };
+    };
 
     enlargeSnake() {
         let newSnake = [...this.state.snakeDots];
         newSnake.unshift([])
         this.setState({
             snakeDots: newSnake
-        })
-    }
+        });
+    };
 
     increaseSpeed() {
         if (this.state.speed > 10) {
             this.setState({
                 speed: this.state.speed - 10
-            })
-        }
-    }
+            });
+        };
+    };
 
     onGameOver() {
         alert(`Game Over. Snake length is ${this.state.snakeDots.length}`);
-        this.setState(initialState)
-    }
+        this.setState(initialState);
+    };
 
-    onStartGame = () => {
-        console.log(this.state)
-        this.setState({ isStarted: true })
+    onExitGame = () => {
+        this.props.navigate('/games');
     }
 
     render() {
         return (
             <section>
-                {
-                    this.state.isStarted ?
-                        <div>
-                            <div className="game-area">
-                                <Snake snakeDots={this.state.snakeDots} />
-                                <Food dot={this.state.food} />
-                            </div>
-                            <button type='button' className='main-form__button main-form__button_resolve'>Game Over</button>
-                        </div>
-                        :
-                        <div>
-                            <form className='main-form'>
-                                <h2 className='main-form__text'>Do you want to play?</h2>
-                                <div className='main-form__buttons'>
-                                    <button type='button' className='main-form__button main-form__button_resolve'>No</button>
-                                    <button type='button' className='main-form__button main-form__button_resolve' onClick={this.onStartGame}>Yes</button>
-                                </div>
-                            </form>
-                        </div>
-
-                }
-
+                <div>
+                    <div className="game-area">
+                        <Snake snakeDots={this.state.snakeDots} />
+                        <Food dot={this.state.food} />
+                    </div>
+                    <button className='game-area__button_exit'
+                        type='button'
+                        onClick={this.onExitGame}
+                    >
+                        Exit
+                    </button>
+                </div>
             </section>
         );
     }
