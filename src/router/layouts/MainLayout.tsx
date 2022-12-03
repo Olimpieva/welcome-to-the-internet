@@ -5,7 +5,7 @@ import { useAppSelector, useAppThunkDispatch } from 'utils/hooks';
 import { selectIsAuthorized } from 'redux/user/selectors';
 import { identifyUser } from 'redux/user/actions';
 
-import './MainLayout.module.scss';
+import css from './MainLayout.module.scss';
 
 const MainLayout = () => {
   const isAuthorized = useAppSelector(selectIsAuthorized);
@@ -21,7 +21,11 @@ const MainLayout = () => {
     return null;
   }
 
-  return <Outlet />;
+  return (
+    <div className={css.layout}>
+      <Outlet />
+    </div>
+  );
 };
 
 export default memo(MainLayout);

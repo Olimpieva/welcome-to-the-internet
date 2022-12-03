@@ -17,10 +17,10 @@ const identifyUser = createAsyncThunk('user/identifyUser', async (_, { dispatch 
 });
 
 // @ts-ignore
-const login = createAsyncThunk<undefined, string, any>('auth/login', async (username, { dispatch }) => {
+const authUser = createAsyncThunk<undefined, string, any>('user/authUser', async (username, { dispatch }) => {
   sessionStorage.setItem('username', username);
 
   await dispatch(setUser(username));
 });
 
-export { setUser, identifyUser, clearUser, login };
+export { setUser, identifyUser, clearUser, authUser };
