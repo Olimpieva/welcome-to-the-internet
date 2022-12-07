@@ -1,14 +1,18 @@
 import React from 'react';
-
-import { Minesweeper } from 'games';
+import { Button } from 'antd';
+import { Link } from 'react-router-dom';
 
 import css from './GamesPage.module.scss';
 
 function GamesPage() {
-  console.log('GAMES');
   return (
     <div className={css.page}>
-      <Minesweeper />
+      <Link to="minesweeper">
+        <Button>Minesweeper</Button>
+      </Link>
+      <Link to="rock-paper-scissors">
+        <Button>Rock Paper Scissors</Button>
+      </Link>
     </div>
   );
 }
