@@ -13,6 +13,9 @@ function GamesPage() {
       <Link to="rock-paper-scissors">
         <Button>Rock Paper Scissors</Button>
       </Link>
+      <Link to="chrome-dino">
+        <Button>Chrome Dino</Button>
+      </Link>
     </div>
   );
 }

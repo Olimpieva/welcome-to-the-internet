@@ -1,0 +1,76 @@
+$containerWidth: 100;
+$containerHeight: 30;
+$defaultRatio: calc($containerWidth / $containerHeight);
+$currentRation: calc(100vw / 100vh);
+
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+.container {
+  overflow: hidden;
+  position: relative;
+  max-width: 1000px;
+  max-height: 1000px;
+
+  @if $currentRation <= $defaultRatio {
+    $containerToPixelScale: strip-units(calc(100vw / $containerWidth));
+    width: calc($containerToPixelScale * 100vw);
+    height: calc($containerToPixelScale * 100vw);
+  }
+  @if $currentRation > $defaultRatio {
+    $containerToPixelScale: calc(100vh / $containerHeight);
+    width: calc($containerToPixelScale * 100vw);
+    height: calc($containerToPixelScale * 100vw);
+  }
+}
+
+.score {
+  position: absolute;
+  font-size: 3vmin;
+  right: 1vmin;
+  top: 1vmin;
+}
+
+.startScreent {
+  position: absolute;
+  font-size: 5vmin;
+  top: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hide {
+  dispay: none;
+}
+
+.groundStart {
+  --left: 0;
+  position: absolute;
+  width: 300%;
+  bottom: 0;
+  left: calc(var(--left) * 1%);
+}
+
+.groundEnd {
+  --left: 0;
+  position: absolute;
+  width: 300%;
+  bottom: 0;
+  left: calc(var(--left) * 1%);
+}
+
+.dino {
+  --bottom: 0;
+  position: absolute;
+  left: 1%;
+  height: 30%;
+  bottom: calc(var(--bottom) * 1%);
+}
+
+.cactus {
+  position: absolute;
+  height: 30%;
+  left: calc(var(--left) * 1%);
+  bottom: 0;
+}

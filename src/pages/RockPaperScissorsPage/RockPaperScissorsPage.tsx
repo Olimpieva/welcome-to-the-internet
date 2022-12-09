@@ -2,9 +2,9 @@ import React from 'react';
 
 import { RockPaperScissors } from 'games';
 
-import css from './MinesweeperPage.module.scss';
+import css from './RockPaperScissorsPage.module.scss';
 
-function MinesweeperPage() {
+function RockPaperScissorsPage() {
   return (
     <div className={css.page}>
       <h1>Rock Paper Scissors</h1>
@@ -13,4 +13,4 @@ function MinesweeperPage() {
   );
 }
 
-export default MinesweeperPage;
+export default RockPaperScissorsPage;
